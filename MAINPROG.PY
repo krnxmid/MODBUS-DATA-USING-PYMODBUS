@@ -5,7 +5,7 @@ from datetime import datetime
 import pymodbus
 from pymodbus.client import ModbusSerialClient
 
-#CHOICES:
+# WRITE OPERATION
 def write():
     print(" ")
     print("### Modbus writing operation ###")
@@ -16,7 +16,7 @@ def write():
     add = int(input("Enter the register address: "))
     val = int(input("Enter the value to write: "))
 
-    #MAKE CONNECTION
+    # MAKE CONNECTION
     client = ModbusSerialClient(port=com, baudrate=baud, timeout=1, stopbits=1, bytesize=8, parity='N')
 
     if client.connect():
@@ -33,6 +33,8 @@ def write():
     client.close()
     input()
 
+
+# READ OPERATION
 def read():
     print(" ")
     print("### Modbus reading operation ###")
@@ -59,6 +61,7 @@ def read():
     client.close()
     input()
 
+#MONITER OPERATION
 def monitor():
     print(" ")
     print("### Modbus reading monitor ###")
@@ -115,6 +118,7 @@ def menu():
         monitor()
     else:
         print("Exiting...")
-        
+
+#RUN MENU
 menu()
 input()
