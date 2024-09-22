@@ -1,11 +1,11 @@
-# import necessary packages
+# IMPORT NEEDED PACKAGES
 import time
 import pytz
 from datetime import datetime
 import pymodbus
 from pymodbus.client import ModbusSerialClient
 
-#    choices:
+#CHOICES:
 def write():
     print(" ")
     print("### Modbus writing operation ###")
@@ -16,7 +16,7 @@ def write():
     add = int(input("Enter the register address: "))
     val = int(input("Enter the value to write: "))
 
-    # establish connection
+    #MAKE CONNECTION
     client = ModbusSerialClient(port=com, baudrate=baud, timeout=1, stopbits=1, bytesize=8, parity='N')
 
     if client.connect():
@@ -79,16 +79,16 @@ def monitor():
         count = int(input("Enter count: "))
         try:
             while True:
-                # Read registers
+                # READ REGISTER VALUE
                 result = client.read_holding_registers(add, 10, slv)
 
                 if result.isError():
                     print("Failed to read the values.")
                 else:
-                    # Get the time in GMT+5:30
+                    # GET TIME FROM GMT+5:30
                     current_time = datetime.now(timezone).strftime('%Y-%m-%d %H:%M:%S')
                     
-                    # Display the value with the current date and time
+                    # DISPLAY VALUE+TIME
                     print(f"{current_time} - Values read from address {add}: {result.registers}")
                 
                 # DELAY BEFORE LOOPING AGIAN
@@ -100,6 +100,7 @@ def monitor():
     else:
         print("Failed to connect to the server.")
 
+#MAIN MENU
 def menu():
     print("### Modbus Menu ###")
     print("1. Write")
